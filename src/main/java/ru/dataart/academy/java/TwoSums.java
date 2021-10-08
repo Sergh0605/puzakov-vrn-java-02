@@ -11,9 +11,17 @@ public class TwoSums {
      * Result - []
      */
     public int[] getTwoSum(int[] nums, int target) {
-        // Task implementation
+        // Special cases check
+        if (nums.length < 2) return new int[]{};
+        if (nums.length == 2) {
+            if (nums[0] + nums[1] == target) return new int[]{nums[0], nums[1]};
+            else return new int[]{};
+        }
+        if (target == 0 && nums[0] + nums[1] == target) return new int[]{nums[0], nums[1]};
+
+        // Searching
         int indexOfFirstSmallerOrEqualElement = getIndexOfFirstSmallerOrEqualElement(nums, target);
-        if (indexOfFirstSmallerOrEqualElement == -1 || nums.length < 2) return new int[]{};
+        if (indexOfFirstSmallerOrEqualElement == -1) return new int[]{};
         for (int i = 0; i < indexOfFirstSmallerOrEqualElement; i++) {
             for (int k = indexOfFirstSmallerOrEqualElement; k > i; k--) {
                 if (nums[i] + nums[k] == target) return new int[]{nums[i], nums[k]};
@@ -23,14 +31,14 @@ public class TwoSums {
     }
 
     private static int getIndexOfFirstSmallerOrEqualElement(int arr[], int elementToSearch) {
-        //binary search for the first smaller or equal element
         int firstIndex = 0;
         int lastIndex = arr.length - 1;
 
-        if (arr[0] == elementToSearch) return 0;
+        // Special cases check
         if (arr[arr.length-1] < elementToSearch) return arr.length-1;
-        if (arr[0] > elementToSearch) return -1;
+        if (arr[0] >= elementToSearch) return -1;
 
+        //binary search for the first smaller or equal element
         while(firstIndex <= lastIndex) {
             int middleIndex = (firstIndex + lastIndex) / 2;
 
