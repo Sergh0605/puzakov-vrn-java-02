@@ -11,7 +11,24 @@ public class ReverseInteger {
      */
 
     public int reverse(int inputNumber) {
-        //Task implementation
-        return 0;
+        boolean negative = false;
+        // Special cases check
+        if (inputNumber < 10 && inputNumber > -10) return inputNumber;
+
+        // main calculations
+        if (inputNumber < 0) {
+            negative = true;
+            inputNumber *= -1;
+        }
+        char[] charsOfInputNumber = String.valueOf(inputNumber).toCharArray();
+        for (int i = 0; i <= charsOfInputNumber.length - 1 - i; i++) {
+            char tmp;
+            tmp = charsOfInputNumber[i];
+            charsOfInputNumber[i] = charsOfInputNumber[charsOfInputNumber.length - 1 - i];
+            charsOfInputNumber[charsOfInputNumber.length - 1 - i] = tmp;
+        }
+        int outputValue = Integer.parseInt(String.valueOf(charsOfInputNumber));
+        if (negative) return outputValue *= -1;
+        else return outputValue;
     }
 }
